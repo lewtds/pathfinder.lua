@@ -105,3 +105,7 @@ local distances = Pathfinder.weights_from_point{
 
 This library uses nodes as table keys. Hence you have to be extra careful if your nodes are tables:
 http://stackoverflow.com/questions/9201601/lua-how-to-look-up-in-a-table-where-the-keys-are-tables-or-objects
+
+## License
+
+https://mit-license.org/
