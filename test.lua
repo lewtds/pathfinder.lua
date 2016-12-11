@@ -1,0 +1,4 @@
+-- TODO:
+-- - empty graph
+-- - no path
+-- - make sure the path is the shortest
