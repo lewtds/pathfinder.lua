@@ -4,6 +4,7 @@ This library provides two main functionalities:
 
 - finding the optimal path from point A to B, and
 - finding the distances from one point to the other points, useful to calculate movement/attack range like in the Fire Emblem series
+  ![Fire Emblem range](misc/fire_emblem.png)
 
 
 ## Examples
