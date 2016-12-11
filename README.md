@@ -1,4 +1,4 @@
-# Pathfinder for Lua using A* and BFS
+# Pathfinder for Lua using [A* and BFS](http://web.mit.edu/eranki/www/tutorials/search/)
 
 This library provides two main functionalities:
 
