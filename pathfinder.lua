@@ -63,7 +63,6 @@ function Pathfinder.astar(start, dest, neighbors, weight, heuristic)
     return table_get_default(fscore, n1, math.huge) > table_get_default(fscore, n2, math.huge)
   end)
 
-  local prev = nil
   local current = start
   while current and current ~= dest do
     for i,node in ipairs(neighbors(current)) do
@@ -82,7 +81,6 @@ function Pathfinder.astar(start, dest, neighbors, weight, heuristic)
       end
     end
 
-    prev = current
     current = PriorityQueue.pop(to_search)
   end
 
