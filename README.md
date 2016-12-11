@@ -108,7 +108,7 @@ local distances = Pathfinder.weights_from_point{
 ```
 
 
-## References
+## API Reference
 
 - `Pathfinder.shortest_path{start, dest, neighbors, weight, heuristic}`<br>
   Run an A* search to find the shortest path between `start` and `dest`.
