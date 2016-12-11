@@ -6,15 +6,15 @@ end
 -- FIXME: very naive and sloooow implementation lol
 local PriorityQueue = {}
 
-function PriorityQueue.new(compare_nodes)
+function PriorityQueue.new(comparer)
   return {
-    compare_nodes = compare_nodes
+    comparer = comparer
   }
 end
 
 function PriorityQueue.add(queue, node)
   table.insert(queue, node)
-  table.sort(queue, queue.compare_nodes)
+  table.sort(queue, queue.comparer)
 end
 
 function PriorityQueue.pop(queue)
