@@ -10,20 +10,19 @@ This library provides two main functionalities:
 
 You generally have to provide 3 functions that defines the graph/map:
 
-- `neighbors(node) -> List<Node>`:  provide a list of neighbors of a node
-- `weight(node, neighbor) -> Number`: provide the cost/weight when moving from `node` to `neighbor`. If this is not set, then a default weight function will be used that always return 1.
-- `nodes_distance(node1, node2) -> Number`: provide the distance between two nodes for the default heuristic function.
+- `neighbors(node: Node) -> List<Node>`<br>
+  Provide a list of neighbors of a node
+
+- `weight(node: Node, neighbor: Node) -> Number`<br>
+  Provide the cost/weight when moving from `node` to `neighbor`. If this is not set, then a default weight function will be used that always return 1.
+
+- `heuristic(node: Node, dest: Node) -> Number`<br>
+  Provide a rough estimation of how far away `node` is from `dest`. Usually a straight distance function is used.
 
 
 ```lua
 local Pathfinder = require 'pathfinder'
 
--- nodes = {
--- 	 1,  2,  3,  4,
--- 	 5,  6,  7,  8,
--- 	 9, 10, 11, 12,
--- 	13, 14, 15, 16
--- }
 
 local obstacles = {
 	['.'] = 1,
@@ -39,6 +38,13 @@ local map =
 
 local function neighbors(node)
 	-- NOTE: You can use either this function or weight() to filter out inaccessible nodes
+
+	-- nodes = {
+	-- 	 1,  2,  3,  4,
+	-- 	 5,  6,  7,  8,
+	-- 	 9, 10, 11, 12,
+	-- 	13, 14, 15, 16
+	-- }
 
 	local list = {}
 	local up, down, left, right = node - 4, node + 4, node - 1, node + 1
@@ -69,7 +75,7 @@ local path = Pathfinder.shortest_path{
 	dest = 14,
 	neighbors = neighbors,
 	weight = weight,
-	nodes_distance = distance_squared,
+	heuristic = distance_squared,
 }
 
 -- -> { 2, 3, 7, 11, 15, 14 }
@@ -92,10 +98,8 @@ local distances = Pathfinder.weights_from_point{
 
 ## References
 
-- Pathfinder.shortest_path
-- Pathfinder.shortest_path_with_heuristic
-- Pathfinder.astar
-- Pathfinder.weights_from_point
+- Pathfinder.shortest_path{start, dest, neighbors, weight, heuristic}
+- Pathfinder.weights_from_point{start, neighbors, weight, max_weight}
 
 ## Note on `node`
 

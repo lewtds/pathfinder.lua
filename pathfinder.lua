@@ -59,7 +59,7 @@ function Pathfinder.astar(start, dest, neighbors, weight, heuristic)
 					if tentative_gscore < table_get_default(gscore, node, math.huge) then
 						come_from[node] = current
 						gscore[node] = tentative_gscore
-						fscore[node] = tentative_gscore + heuristic(node)
+						fscore[node] = tentative_gscore + heuristic(node, dest)
 					end
 				end
 			end
@@ -73,7 +73,7 @@ function Pathfinder.astar(start, dest, neighbors, weight, heuristic)
 end
 
 
-function Pathfinder.shortest_path_with_heuristic(arg)
+function Pathfinder.shortest_path(arg)
 	local start, dest, neighbors, weight, heuristic = arg.start, arg.dest, arg.neighbors, arg.weight, arg.heuristic
 	local come_from = Pathfinder.astar(start, dest, neighbors, weight, heuristic)
 
@@ -90,21 +90,6 @@ function Pathfinder.shortest_path_with_heuristic(arg)
 	return path
 end
 
-
-function Pathfinder.shortest_path(arg)
-	local start, dest, neighbors, weight, nodes_distance = arg.start, arg.dest, arg.neighbors, arg.weight, arg.nodes_distance
-	local function distance_to_dest(node)
-		return nodes_distance(node, dest)
-	end
-
-	return Pathfinder.shortest_path_with_heuristic{
-		start = start, 
-		dest = dest, 
-		neighbors = neighbors, 
-		weight = weight, 
-		heuristic = distance_to_dest,
-	}
-end
 
 
 function Pathfinder.weights_from_point(arg)
