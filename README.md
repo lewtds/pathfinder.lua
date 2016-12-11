@@ -25,9 +25,9 @@ local Pathfinder = require 'pathfinder'
 
 
 local obstacles = {
-	['.'] = 1,
-	['~'] = 4,
-	['^'] = 20,
+	['.'] = 1,  -- grass
+	['~'] = 4,  -- river
+	['^'] = 20, -- mountain
 }
 
 local map = 
