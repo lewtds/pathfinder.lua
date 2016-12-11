@@ -3,7 +3,7 @@
 This library provides two main functionalities:
 
 - finding the optimal path from point A to B, and
-- finding the distances from one point to the other points
+- finding the distances from one point to the other points, useful to calculate movement/attack range like in the Fire Emblem series
 
 
 ## Examples
@@ -17,12 +17,15 @@ You generally have to provide 3 functions that defines the graph/map:
   Provide the cost/weight when moving from `node` to `neighbor`. If this is not set, then a default weight function will be used that always return 1.
 
 - `heuristic(node: Node, dest: Node) -> Number`<br>
-  Provide a rough estimation of how far away `node` is from `dest`. Usually a straight distance function is used.
+  Provide a rough estimation of how far away `node` is from `dest` to guide the searching process. Usually a straight distance function is used.
 
 
 ```lua
 local Pathfinder = require 'pathfinder'
 
+--
+-- SETTING UP
+--
 
 local obstacles = {
 	['.'] = 1,  -- grass
@@ -70,6 +73,13 @@ local function weight(node, neighbor)
 	return obstacles[ob] or math.huge
 end
 
+
+
+--
+-- ACTUAL USAGE
+--
+
+
 local path = Pathfinder.shortest_path{
 	start = 1,
 	dest = 14,
@@ -98,8 +108,11 @@ local distances = Pathfinder.weights_from_point{
 
 ## References
 
-- Pathfinder.shortest_path{start, dest, neighbors, weight, heuristic}
-- Pathfinder.weights_from_point{start, neighbors, weight, max_weight}
+- `Pathfinder.shortest_path{start, dest, neighbors, weight, heuristic}`<br>
+  Run an A* search to find the shortest path between `start` and `dest`.
+
+- `Pathfinder.weights_from_point{start, neighbors, weight, max_weight}`<br>
+  Run a simple breadth first search (BFS) to figure out the total cost from `start` to other destinations in its vicinity, limited by the optional `max_weight`.
 
 ## Note on `node`
 
