@@ -1,8 +1,5 @@
 local function table_get_default(table, key, default)
-  if not table[key] then
-    table[key] = default
-  end
-  return table[key]
+  return table[key] or default
 end
 
 
