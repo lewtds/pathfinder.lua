@@ -106,10 +106,11 @@ while count < 200 do
 		heuristic = distance_squared,
 	}
 
-	total_time = total_time + os:clock() - start_time
+	local runtime = os:clock() - start_time
+	total_time = total_time + runtime
 
 	local deviation = #path - test.optimal_len
-	print(string.format("test: #%s\tlength: %i\toptimal: %i\tdeviation: %f", count, #path, test.optimal_len, deviation))
+	print(string.format("test: #%s\tlength: %i\toptimal: %g\tdeviation: %f\ttime: %g ms", count, #path, test.optimal_len, deviation, runtime * 1000))
 
 	count = count + 1
 end
