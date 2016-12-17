@@ -56,6 +56,7 @@ end
 function Pathfinder.astar(start, dest, neighbors, weight, heuristic)
   weight = weight or constant_weight
   local come_from = {}
+  local seen = {}
   local fscore = {[start] = 0}
   local gscore = {[start] = 0}
 
@@ -65,8 +66,10 @@ function Pathfinder.astar(start, dest, neighbors, weight, heuristic)
 
   local current = start
   while current and current ~= dest do
+    seen[current] = true
+
     for i,node in ipairs(neighbors(current)) do
-      if not come_from[node] then
+      if not seen[node] then
         local tentative_gscore = table_get_default(gscore, current, math.huge) + weight(current, node)
 
         if gscore[node] == nil then
